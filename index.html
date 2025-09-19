@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +9,10 @@
     body { background-color: #f5f5f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
     .container { max-width: 600px; margin-top: 20px; }
     .primary-color { background-color: #e42327 !important; }
-    .required-note { color: #e42327; font-size: 0.9rem; margin-bottom: 20px; }
+    .required-note { color: #e42327; font-size: 0.85rem; margin-bottom: 20px; }
     .required label:after { content: " (*)"; color: #e42327; }
-    .input-field label { color: #555; }
+    .input-field label { color: #555; font-size: 0.9rem; }
+    .select-wrapper input.select-dropdown { font-size: 1rem; }
     .btn .spinner { display: none; width: 20px; height: 20px; vertical-align: middle; margin-left: 10px; }
     .btn.loading .btn-text, .btn.loading .btn-icon { display: none; }
     .btn.loading .spinner { display: inline-block; }
@@ -23,7 +23,7 @@
     <div class="card-panel">
       <p class="required-note">(*) là các trường bắt buộc.</p>
       <form id="opportunityForm">
-        <!-- ... TOÀN BỘ CÁC TRƯỜNG INPUT GIỮ NGUYÊN ... -->
+        <!-- ... Các trường input của bạn ... -->
         <div class="row">
           <div class="input-field col s12 required">
             <input id="ten_khach_hang" name="ten_khach_hang" type="text" class="validate" required>
@@ -45,8 +45,7 @@
         <div class="row">
           <div class="input-field col s12">
             <select id="san_pham_can_in" name="san_pham_can_in">
-              <option value="" disabled selected>Chọn sản phẩm</option>
-              <option value="Sticker sheet">Sticker sheet</option><option value="Sticker diecut">Sticker diecut</option><option value="In logo">In logo</option><option value="Nhãn dán">Nhãn dán</option><option value="Enamel pin ghim kim loại">Enamel pin ghim kim loại</option><option value="Áo thun">Áo thun</option><option value="Patch vải">Patch vải</option><option value="Sticker ủi lên vải, quần áo">Sticker ủi lên vải, quần áo</option><option value="Sticker kim loại Metal">Sticker kim loại Metal</option><option value="DTF">DTF</option><option value="Khác">Khác</option>
+              <option value="" disabled selected>Chọn sản phẩm</option><option value="Sticker sheet">Sticker sheet</option><option value="Sticker diecut">Sticker diecut</option><option value="In logo">In logo</option><option value="Nhãn dán">Nhãn dán</option><option value="Enamel pin ghim kim loại">Enamel pin ghim kim loại</option><option value="Áo thun">Áo thun</option><option value="Patch vải">Patch vải</option><option value="Sticker ủi lên vải, quần áo">Sticker ủi lên vải, quần áo</option><option value="Sticker kim loại Metal">Sticker kim loại Metal</option><option value="DTF">DTF</option><option value="Khác">Khác</option>
             </select>
             <label>Sản phẩm cần in</label>
           </div>
@@ -60,8 +59,7 @@
         <div class="row">
           <div class="input-field col s12">
             <select id="muc_dich_su_dung" name="muc_dich_su_dung">
-              <option value="" disabled selected>Chọn mục đích</option>
-              <option value="Marketing nội bộ công ty">Marketing nội bộ công ty</option><option value="Để bán/kinh doanh">Để bán/kinh doanh</option><option value="Quà tặng sự kiện">Quà tặng sự kiện</option><option value="Quà tặng KH">Quà tặng KH</option><option value="Quà tặng người thân">Quà tặng người thân</option><option value="FOR FUN ( IN DÁN CHƠI )">FOR FUN ( IN DÁN CHƠI )</option><option value="Làm đồ án mỹ thuật">Làm đồ án mỹ thuật</option><option value="Nhãn dán bao bì">Nhãn dán bao bì</option><option value="Khác">Khác</option>
+              <option value="" disabled selected>Chọn mục đích</option><option value="Marketing nội bộ công ty">Marketing nội bộ công ty</option><option value="Để bán/kinh doanh">Để bán/kinh doanh</option><option value="Quà tặng sự kiện">Quà tặng sự kiện</option><option value="Quà tặng KH">Quà tặng KH</option><option value="Quà tặng người thân">Quà tặng người thân</option><option value="FOR FUN ( IN DÁN CHƠI )">FOR FUN ( IN DÁN CHƠI )</option><option value="Làm đồ án mỹ thuật">Làm đồ án mỹ thuật</option><option value="Nhãn dán bao bì">Nhãn dán bao bì</option><option value="Khác">Khác</option>
             </select>
             <label>Mục đích sử dụng</label>
           </div>
@@ -100,12 +98,13 @@
       <div id="responseMessage" class="center-align" style="margin-top: 20px;"></div>
     </div>
   </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script>
-    // ===== LOGIC JAVASCRIPT MỚI SỬ DỤNG FETCH API =====
+    // ===== LOGIC JAVASCRIPT ĐỘC LẬP SỬ DỤNG FETCH API =====
     
     // QUAN TRỌNG: DÁN URL WEB APP BẠN ĐÃ TRIỂN KHAI LẠI Ở BƯỚC 1 VÀO ĐÂY
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxRp8XYR0Ydoc2xspdJu7kDMbtfDDCPBdLaae_YpOHjr_OdYOokxLr7RhpNc2UlQsxT/exec';
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyFEshYsUWG9OhRdDWoH2jMtBeKzRE0tU4o78VpkLluC013VvNwTS8ubHjl9z_10iI0/exec';
 
     const form = document.getElementById('opportunityForm');
     const submitBtn = document.getElementById('submitBtn');
@@ -114,7 +113,7 @@
     document.addEventListener('DOMContentLoaded', function() { M.AutoInit(); });
 
     form.addEventListener('submit', function(event) {
-      event.preventDefault(); // Ngăn form tự gửi đi
+      event.preventDefault();
       submitData();
     });
 
@@ -123,7 +122,6 @@
 
     async function submitData() {
       showLoading();
-      
       const object = {};
       new FormData(form).forEach((value, key) => { object[key] = value; });
 
@@ -140,10 +138,8 @@
         }
       }
       
-      // Gửi dữ liệu đến backend bằng fetch
       fetch(WEB_APP_URL, {
         method: 'POST',
-        // Google Apps Script yêu cầu kiểu nội dung này khi nhận qua e.postData.contents
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(object)
       })
@@ -155,11 +151,7 @@
     function readFileAsBase64(file) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = () => resolve({
-            base64: reader.result,
-            name: file.name,
-            type: file.type
-        });
+        reader.onload = () => resolve({ base64: reader.result, name: file.name, type: file.type });
         reader.onerror = error => reject(error);
         reader.readAsDataURL(file);
       });
